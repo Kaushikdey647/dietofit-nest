@@ -2,8 +2,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MetricsService } from './metrics.service';
-import { MetricsController } from './metrics.controller';
 import { Schema } from 'mongoose';
+import { MetricsController } from './metrics.controller';
 
 // Basic schema for demonstration
 const UserMetricsSchema = new Schema({

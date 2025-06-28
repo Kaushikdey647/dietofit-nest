@@ -1,13 +1,12 @@
-// src/metrics/metrics.controller.ts
 import { Controller, Get } from '@nestjs/common';
 import { MetricsService } from './metrics.service';
 
 @Controller('metrics')
 export class MetricsController {
-  constructor(private readonly metricsService: MetricsService) {}
+    constructor(private readonly metricsService: MetricsService) { }
 
-  @Get('map-reduce')
-  async runMapReduce() {
-    return this.metricsService.runMapReduce();
-  }
+    @Get('map-reduce')
+    async runMapReduce() {
+        return this.metricsService.runMapReduce();
+    }
 }
