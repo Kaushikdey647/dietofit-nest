@@ -1,0 +1,1 @@
+Remove all files in src/metrics/mapReduce and any references to mapReduce logic throughout the codebase. Only repository-based metric logic should remain.

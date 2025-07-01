@@ -2,26 +2,20 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MetricsService } from './metrics.service';
-import { Schema } from 'mongoose';
 import { MetricsController } from './metrics.controller';
-
-// Basic schema for demonstration
-const UserMetricsSchema = new Schema({
-  userId: String,
-  age: Number,
-  weight: Number,
-  height: Number,
-  inches: Number,
-  gender: String,
-});
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { MetricRecord } from '../entities/metric-record.entity';
+import { MetricsRepository } from '../repositories/metrics.repository';
+import { MetricRecordSchema } from '../schemas/metric-record.schema';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([MetricRecord]),
     MongooseModule.forFeature([
-      { name: 'UserMetrics', schema: UserMetricsSchema },
+      { name: 'MetricRecord', schema: MetricRecordSchema },
     ]),
   ],
   controllers: [MetricsController],
-  providers: [MetricsService],
+  providers: [MetricsService, MetricsRepository],
 })
 export class MetricsModule {}
