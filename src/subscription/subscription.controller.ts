@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Param, Body, Delete } from '@nestjs/common';
+import { Controller, Post, Get, Param, Body, Delete, HttpException, HttpStatus } from '@nestjs/common';
 import { SubscriptionService } from './subscription.service';
 import { ISubscription } from '../interfaces/subscription.interface';
 
@@ -8,16 +8,28 @@ export class SubscriptionController {
 
   @Post(':userId')
   async create(@Param('userId') userId: number, @Body() body: ISubscription) {
-    return this.subscriptionService.create({ ...body, user: userId });
+    try {
+      return await this.subscriptionService.create({ ...body, user: userId });
+    } catch (e) {
+      throw new HttpException(e.message, e.status || HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Get(':userId')
   async findByUser(@Param('userId') userId: number) {
-    return this.subscriptionService.findByUser(userId);
+    try {
+      return await this.subscriptionService.findByUser(userId);
+    } catch (e) {
+      throw new HttpException(e.message, e.status || HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Delete(':id')
   async remove(@Param('id') id: number) {
-    return this.subscriptionService.remove(id);
+    try {
+      return await this.subscriptionService.remove(id);
+    } catch (e) {
+      throw new HttpException(e.message, e.status || HttpStatus.BAD_REQUEST);
+    }
   }
 }

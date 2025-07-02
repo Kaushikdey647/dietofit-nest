@@ -7,10 +7,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { MetricRecord } from '../entities/metric-record.entity';
 import { MetricsRepository } from '../repositories/metrics.repository';
 import { MetricRecordSchema } from '../schemas/metric-record.schema';
+import { User } from '../entities/user.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([MetricRecord]),
+    TypeOrmModule.forFeature([MetricRecord, User]),
     MongooseModule.forFeature([
       { name: 'MetricRecord', schema: MetricRecordSchema },
     ]),

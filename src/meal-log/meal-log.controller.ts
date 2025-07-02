@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Param, Body, Delete } from '@nestjs/common';
+import { Controller, Post, Get, Param, Body, Delete, HttpException, HttpStatus } from '@nestjs/common';
 import { MealLogService } from './meal-log.service';
 import { IMealLog } from '../interfaces/meal-log.interface';
 
@@ -8,16 +8,28 @@ export class MealLogController {
 
   @Post(':userId')
   async create(@Param('userId') userId: number, @Body() body: IMealLog) {
-    return this.mealLogService.create({ ...body, user: userId });
+    try {
+      return await this.mealLogService.create({ ...body, user: userId });
+    } catch (e) {
+      throw new HttpException(e.message, e.status || HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Get(':userId')
   async findByUser(@Param('userId') userId: number) {
-    return this.mealLogService.findByUser(userId);
+    try {
+      return await this.mealLogService.findByUser(userId);
+    } catch (e) {
+      throw new HttpException(e.message, e.status || HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Delete(':id')
   async remove(@Param('id') id: number) {
-    return this.mealLogService.remove(id);
+    try {
+      return await this.mealLogService.remove(id);
+    } catch (e) {
+      throw new HttpException(e.message, e.status || HttpStatus.BAD_REQUEST);
+    }
   }
 }

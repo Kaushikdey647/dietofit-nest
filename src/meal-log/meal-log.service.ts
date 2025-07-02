@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MealLog } from '../entities/meal-log.entity';
@@ -16,20 +16,31 @@ export class MealLogService {
 
   async create(log: IMealLog): Promise<MealLog> {
     const user = await this.userRepo.findOne({ where: { id: log.user } });
-    if (!user) throw new Error('User not found');
-    const mealLog = this.mealLogRepo.create({ ...log, user });
-    return this.mealLogRepo.save(mealLog);
+    if (!user) throw new NotFoundException('User not found');
+    try {
+      const mealLog = this.mealLogRepo.create({ ...log, user });
+      return await this.mealLogRepo.save(mealLog);
+    } catch (e) {
+      throw new BadRequestException('Failed to create meal log');
+    }
   }
 
   async findByUser(userId: number): Promise<MealLog[]> {
-    return this.mealLogRepo.find({ where: { user: { id: userId } }, order: { date: 'DESC' } });
+    try {
+      return await this.mealLogRepo.find({ where: { user: { id: userId } }, order: { date: 'DESC' } });
+    } catch (e) {
+      throw new BadRequestException('Failed to fetch meal logs');
+    }
   }
 
   async findOne(id: number): Promise<MealLog | null> {
-    return this.mealLogRepo.findOne({ where: { id } });
+    const log = await this.mealLogRepo.findOne({ where: { id } });
+    if (!log) throw new NotFoundException('Meal log not found');
+    return log;
   }
 
   async remove(id: number): Promise<void> {
-    await this.mealLogRepo.delete(id);
+    const result = await this.mealLogRepo.delete(id);
+    if (!result.affected) throw new NotFoundException('Meal log not found');
   }
 }
