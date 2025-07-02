@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { MealPlanTable } from './meal-plan-table.entity';
+import { User } from './user.entity';
 
 export enum MealType {
   BREAKFAST = 'breakfast',
@@ -14,6 +15,9 @@ export class MealPlan {
 
   @ManyToOne(() => MealPlanTable, table => table.mealPlans)
   mealPlanTable: MealPlanTable;
+
+  @ManyToOne(() => User)
+  user: User;
 
   @Column({ type: 'enum', enum: MealType })
   meal: MealType;
@@ -41,4 +45,10 @@ export class MealPlan {
 
   @Column('simple-json')
   items: string[];
+
+  @Column({ type: 'timestamp', nullable: true })
+  startDate: Date;
+
+  @Column({ type: 'timestamp', nullable: true })
+  endDate: Date;
 }

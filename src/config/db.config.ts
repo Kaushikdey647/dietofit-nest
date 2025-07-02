@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 export enum DbReadWriteMode {
   POSTGRES = 'postgres',
   MONGO = 'mongo',

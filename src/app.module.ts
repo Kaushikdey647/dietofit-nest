@@ -27,7 +27,6 @@ import { HealthzModule } from './healthz/healthz.module';
     MetricsModule,
     MealLogModule,
     MealPlanModule,
-    // ChecklistModule,
     SubscriptionModule,
     HealthzModule,
   ],

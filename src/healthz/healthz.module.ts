@@ -4,6 +4,7 @@ import { HealthzService } from './healthz.service';
 import { TypeOrmDriver } from '../drivers/typeorm.driver';
 import { MongooseDriver } from '../drivers/mongoose.driver';
 import { DataSource } from 'typeorm';
+import 'dotenv/config';
 
 @Module({
   controllers: [HealthzController],

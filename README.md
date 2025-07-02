@@ -45,15 +45,19 @@
 
 | Method | Path                        | Description                  |
 |--------|-----------------------------|------------------------------|
-| POST   | `/metrics/:userId`          | Add metric record            |
-| GET    | `/metrics/:userId`          | Fetch user metrics           |
-| POST   | `/meal-log/:userId`         | Add daily meal log           |
-| GET    | `/meal-log/:userId`         | Fetch meal logs              |
-| POST   | `/meal-plan/:userId`        | Add weekly meal plan         |
-| GET    | `/meal-plan/:userId`        | Fetch meal plan              |
-| POST   | `/checklist/:userId`        | Add daily checklist          |
-| GET    | `/checklist/:userId`        | Fetch checklists             |
+| GET    | `/`                         | Hello World test endpoint    |
 | GET    | `/healthz`                  | Health check (DBs)           |
+| POST   | `/meal-plan/:userId`        | Create meal plan for user    |
+| GET    | `/meal-plan/:userId`        | Get meal plans for user      |
+| DELETE | `/meal-plan/:id`            | Delete meal plan by ID       |
+| POST   | `/meal-log/:userId`         | Create meal log for user     |
+| GET    | `/meal-log/:userId`         | Get meal logs for user       |
+| DELETE | `/meal-log/:id`             | Delete meal log by ID        |
+| POST   | `/metrics`                  | Add metric record            |
+| GET    | `/metrics/:userId`          | Get metrics for user         |
+| POST   | `/subscription/:userId`     | Create subscription for user |
+| GET    | `/subscription/:userId`     | Get subscriptions for user   |
+| DELETE | `/subscription/:id`         | Delete subscription by ID    |
 | GET    | `/api`                      | Swagger API docs             |
 
 ---

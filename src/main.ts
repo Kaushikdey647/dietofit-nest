@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import 'dotenv/config';
 
 const APP_TITLE = process.env.APP_TITLE || "Diet o'Fits API";
 const APP_DESCRIPTION = process.env.APP_DESCRIPTION || 'API documentation for Diet o\'Fits';
