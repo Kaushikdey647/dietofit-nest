@@ -17,4 +17,7 @@ export class User {
   @Column({ nullable: true })
   dateOfBirth?: Date;
   // Add other constants as needed
+  // Relations
+  // One user can have many meal plan tables (for history/versioning, or just one if you prefer)
+  // One user can have many meal logs
 }

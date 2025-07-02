@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { DatabaseDriver } from './database-driver.interface';
+import { DatabaseDriver } from '../interfaces/database-driver.interface';
 
 export class TypeOrmDriver implements DatabaseDriver {
   constructor(private readonly dataSource: DataSource) {}

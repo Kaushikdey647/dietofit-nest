@@ -1,23 +1,18 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn } from 'typeorm';
 import { User } from './user.entity';
+import { MealPlan } from './meal-plan.entity';
 
 @Entity()
 export class MealLog {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => User, user => user.id)
+  @ManyToOne(() => User)
   user: User;
 
-  @Column()
-  mealType: string; // e.g., breakfast, lunch, dinner, snack
-
-  @Column('jsonb')
-  foods: Array<{ name: string; quantity: number; kcal: number }>;
-
-  @Column({ type: 'date' })
-  date: string;
+  @ManyToOne(() => MealPlan)
+  mealPlan: MealPlan;
 
   @CreateDateColumn()
-  createdAt: Date;
+  timestamp: Date;
 }

@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { HealthzController } from './healthz.controller';
 import { HealthzService } from './healthz.service';
-import { TypeOrmDriver } from '../interfaces/typeorm.driver';
-import { MongooseDriver } from '../interfaces/mongoose.driver';
+import { TypeOrmDriver } from '../drivers/typeorm.driver';
+import { MongooseDriver } from '../drivers/mongoose.driver';
 import { DataSource } from 'typeorm';
 
 @Module({

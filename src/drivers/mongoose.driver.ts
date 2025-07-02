@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import { DatabaseDriver } from './database-driver.interface';
+import { DatabaseDriver } from '../interfaces/database-driver.interface';
 
 export class MongooseDriver implements DatabaseDriver {
   constructor(private readonly uri: string) {}

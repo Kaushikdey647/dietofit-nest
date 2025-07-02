@@ -9,11 +9,11 @@ import { User } from './entities/user.entity';
 import { MetricRecord } from './entities/metric-record.entity';
 import { MealLog } from './entities/meal-log.entity';
 import { MealPlan } from './entities/meal-plan.entity';
-import { Checklist } from './entities/checklist.entity';
+// import { Checklist } from './entities/checklist.entity';
 import { Subscription } from './entities/subscription.entity';
 import { MealLogModule } from './meal-log/meal-log.module';
 import { MealPlanModule } from './meal-plan/meal-plan.module';
-import { ChecklistModule } from './checklist/checklist.module';
+// import { ChecklistModule } from './checklist/checklist.module';
 import { SubscriptionModule } from './subscription/subscription.module';
 import { typeOrmConfig } from './config/typeorm.config';
 import { mongooseConfig } from './config/mongoose.config';
@@ -27,7 +27,7 @@ import { HealthzModule } from './healthz/healthz.module';
     MetricsModule,
     MealLogModule,
     MealPlanModule,
-    ChecklistModule,
+    // ChecklistModule,
     SubscriptionModule,
     HealthzModule,
   ],

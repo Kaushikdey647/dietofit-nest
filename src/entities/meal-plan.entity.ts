@@ -1,23 +1,44 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from 'typeorm';
-import { User } from './user.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { MealPlanTable } from './meal-plan-table.entity';
+
+export enum MealType {
+  BREAKFAST = 'breakfast',
+  LUNCH = 'lunch',
+  DINNER = 'dinner',
+}
 
 @Entity()
 export class MealPlan {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => User, user => user.id)
-  user: User;
+  @ManyToOne(() => MealPlanTable, table => table.mealPlans)
+  mealPlanTable: MealPlanTable;
 
-  @Column('jsonb')
-  plan: Array<{ day: string; mealType: string; foods: Array<{ name: string; quantity: number; kcal: number }> }>;
+  @Column({ type: 'enum', enum: MealType })
+  meal: MealType;
 
-  @Column({ type: 'date' })
-  startDate: string;
+  @Column({ type: 'enum', enum: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] })
+  weekday: string;
 
-  @Column({ type: 'date' })
-  endDate: string;
+  @Column('float')
+  calories: number;
 
-  @CreateDateColumn()
-  createdAt: Date;
+  @Column('float')
+  fats: number;
+
+  @Column('float')
+  carbs: number;
+
+  @Column('float')
+  fibers: number;
+
+  @Column('float')
+  vitamins: number;
+
+  @Column('float')
+  protein: number;
+
+  @Column('simple-json')
+  items: string[];
 }
