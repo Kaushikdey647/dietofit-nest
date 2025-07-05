@@ -12,9 +12,15 @@ describe('MetricsRepository', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         MetricsRepository,
-        { provide: getRepositoryToken(MetricRecord), useValue: { findOne: jest.fn(), find: jest.fn(), save: jest.fn() } },
+        {
+          provide: getRepositoryToken(MetricRecord),
+          useValue: { findOne: jest.fn(), find: jest.fn(), save: jest.fn() },
+        },
         { provide: getRepositoryToken(User), useValue: { findOne: jest.fn() } },
-        { provide: getModelToken('MetricRecord'), useValue: { create: jest.fn(), find: jest.fn() } },
+        {
+          provide: getModelToken('MetricRecord'),
+          useValue: { create: jest.fn(), find: jest.fn() },
+        },
       ],
     }).compile();
     repo = module.get<MetricsRepository>(MetricsRepository);

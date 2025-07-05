@@ -10,6 +10,8 @@ export class MealPlanTable {
   @ManyToOne(() => User)
   user: User;
 
-  @OneToMany(() => MealPlan, mealPlan => mealPlan.mealPlanTable, { cascade: true })
+  @OneToMany(() => MealPlan, (mealPlan) => mealPlan.mealPlanTable, {
+    cascade: true,
+  })
   mealPlans: MealPlan[];
 }

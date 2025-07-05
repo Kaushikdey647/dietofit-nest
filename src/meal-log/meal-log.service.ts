@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MealLog } from '../entities/meal-log.entity';
@@ -27,7 +31,10 @@ export class MealLogService {
 
   async findByUser(userId: number): Promise<MealLog[]> {
     try {
-      return await this.mealLogRepo.find({ where: { user: { id: userId } }, order: { timestamp: 'DESC' } });
+      return await this.mealLogRepo.find({
+        where: { user: { id: userId } },
+        order: { timestamp: 'DESC' },
+      });
     } catch (e) {
       throw new BadRequestException('Failed to fetch meal logs');
     }

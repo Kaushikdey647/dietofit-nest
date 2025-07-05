@@ -13,7 +13,9 @@ import 'dotenv/config';
       provide: 'DATABASE_DRIVERS',
       useFactory: (dataSource: DataSource) => [
         new TypeOrmDriver(dataSource),
-        new MongooseDriver(process.env.MONGO_URI || 'mongodb://localhost:27017/fitdb'),
+        new MongooseDriver(
+          process.env.MONGO_URI || 'mongodb://localhost:27017/fitdb',
+        ),
       ],
       inject: [DataSource],
     },

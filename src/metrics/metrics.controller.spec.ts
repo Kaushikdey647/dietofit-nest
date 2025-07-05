@@ -14,7 +14,16 @@ describe('MetricsController', () => {
           provide: MetricsService,
           useValue: {
             addMetric: jest.fn(),
-            getUserMetrics: jest.fn().mockResolvedValue([{ id: 1, user: 1, age: 30, weight: 70, height: 175, timestamp: new Date() }]),
+            getUserMetrics: jest.fn().mockResolvedValue([
+              {
+                id: 1,
+                user: 1,
+                age: 30,
+                weight: 70,
+                height: 175,
+                timestamp: new Date(),
+              },
+            ]),
           },
         },
       ],
@@ -29,13 +38,24 @@ describe('MetricsController', () => {
   });
 
   it('should add a metric', async () => {
-    await expect(controller.addMetric({ userId: 1, age: 30, weight: 70, height: 175 })).resolves.toEqual({ success: true });
+    await expect(
+      controller.addMetric({ userId: 1, age: 30, weight: 70, height: 175 }),
+    ).resolves.toEqual({ success: true });
     expect(service.addMetric).toHaveBeenCalledWith(1, 30, 70, 175);
   });
 
   it('should get user metrics', async () => {
     const result = await controller.getUserMetrics('1');
-    expect(result).toEqual([{ id: 1, user: 1, age: 30, weight: 70, height: 175, timestamp: expect.any(Date) }]);
+    expect(result).toEqual([
+      {
+        id: 1,
+        user: 1,
+        age: 30,
+        weight: 70,
+        height: 175,
+        timestamp: expect.any(Date),
+      },
+    ]);
     expect(service.getUserMetrics).toHaveBeenCalledWith('1');
   });
 });

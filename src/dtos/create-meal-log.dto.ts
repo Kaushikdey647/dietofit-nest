@@ -1,4 +1,11 @@
-import { IsInt, IsString, IsArray, IsDateString, ValidateNested, IsNumber } from 'class-validator';
+import {
+  IsInt,
+  IsString,
+  IsArray,
+  IsDateString,
+  ValidateNested,
+  IsNumber,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 
 class FoodItemDto {

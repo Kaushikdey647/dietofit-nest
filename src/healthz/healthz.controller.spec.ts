@@ -12,7 +12,9 @@ describe('HealthzController', () => {
       providers: [
         {
           provide: HealthzService,
-          useValue: { check: jest.fn().mockResolvedValue({ postgres: 'ok', mongo: 'ok' }) },
+          useValue: {
+            check: jest.fn().mockResolvedValue({ postgres: 'ok', mongo: 'ok' }),
+          },
         },
       ],
     }).compile();

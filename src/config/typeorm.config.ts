@@ -10,7 +10,14 @@ import 'dotenv/config';
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: 'postgres',
   url: process.env.POSTGRES_URI,
-  entities: [User, MetricRecord, MealLog, MealPlan, MealPlanTable, Subscription],
+  entities: [
+    User,
+    MetricRecord,
+    MealLog,
+    MealPlan,
+    MealPlanTable,
+    Subscription,
+  ],
   synchronize: true, // Set to false in production!
   ssl: { rejectUnauthorized: false },
 };

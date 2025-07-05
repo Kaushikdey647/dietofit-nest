@@ -3,9 +3,7 @@ import { DatabaseDriver } from '../interfaces/database-driver.interface';
 
 @Injectable()
 export class HealthzService {
-  constructor(
-    private readonly dbDrivers: DatabaseDriver[],
-  ) {}
+  constructor(private readonly dbDrivers: DatabaseDriver[]) {}
 
   async check() {
     const results: Record<string, 'ok' | 'error'> = {};

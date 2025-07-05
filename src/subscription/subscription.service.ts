@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Subscription } from '../entities/subscription.entity';
@@ -27,7 +31,10 @@ export class SubscriptionService {
 
   async findByUser(userId: number): Promise<Subscription[]> {
     try {
-      return await this.subscriptionRepo.find({ where: { user: { id: userId } }, order: { createdAt: 'DESC' } });
+      return await this.subscriptionRepo.find({
+        where: { user: { id: userId } },
+        order: { createdAt: 'DESC' },
+      });
     } catch (e) {
       throw new BadRequestException('Failed to fetch subscriptions');
     }

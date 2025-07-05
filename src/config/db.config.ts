@@ -12,6 +12,7 @@ export interface DbConfig {
 }
 
 export const dbConfig: DbConfig = {
-  read: process.env.DB_READ_MODE as DbReadWriteMode || DbReadWriteMode.POSTGRES,
-  write: process.env.DB_WRITE_MODE as DbReadWriteMode || 'both',
+  read:
+    (process.env.DB_READ_MODE as DbReadWriteMode) || DbReadWriteMode.POSTGRES,
+  write: (process.env.DB_WRITE_MODE as DbReadWriteMode) || 'both',
 };

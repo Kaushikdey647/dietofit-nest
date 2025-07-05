@@ -13,7 +13,7 @@ export class MealPlan {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => MealPlanTable, table => table.mealPlans)
+  @ManyToOne(() => MealPlanTable, (table) => table.mealPlans)
   mealPlanTable: MealPlanTable;
 
   @ManyToOne(() => User)
@@ -22,7 +22,18 @@ export class MealPlan {
   @Column({ type: 'enum', enum: MealType })
   meal: MealType;
 
-  @Column({ type: 'enum', enum: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] })
+  @Column({
+    type: 'enum',
+    enum: [
+      'monday',
+      'tuesday',
+      'wednesday',
+      'thursday',
+      'friday',
+      'saturday',
+      'sunday',
+    ],
+  })
   weekday: string;
 
   @Column('float')

@@ -11,7 +11,16 @@ describe('SubscriptionService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         SubscriptionService,
-        { provide: getRepositoryToken(Subscription), useValue: { create: jest.fn(), save: jest.fn(), find: jest.fn(), findOne: jest.fn(), delete: jest.fn() } },
+        {
+          provide: getRepositoryToken(Subscription),
+          useValue: {
+            create: jest.fn(),
+            save: jest.fn(),
+            find: jest.fn(),
+            findOne: jest.fn(),
+            delete: jest.fn(),
+          },
+        },
         { provide: getRepositoryToken(User), useValue: { findOne: jest.fn() } },
       ],
     }).compile();

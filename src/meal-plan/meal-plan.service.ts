@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MealPlan } from '../entities/meal-plan.entity';
@@ -27,7 +31,10 @@ export class MealPlanService {
 
   async findByUser(userId: number): Promise<MealPlan[]> {
     try {
-      return await this.mealPlanRepo.find({ where: { user: { id: userId } }, order: { startDate: 'DESC' } });
+      return await this.mealPlanRepo.find({
+        where: { user: { id: userId } },
+        order: { startDate: 'DESC' },
+      });
     } catch (e) {
       throw new BadRequestException('Failed to fetch meal plans');
     }

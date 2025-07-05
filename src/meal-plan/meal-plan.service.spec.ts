@@ -11,7 +11,16 @@ describe('MealPlanService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         MealPlanService,
-        { provide: getRepositoryToken(MealPlan), useValue: { create: jest.fn(), save: jest.fn(), find: jest.fn(), findOne: jest.fn(), delete: jest.fn() } },
+        {
+          provide: getRepositoryToken(MealPlan),
+          useValue: {
+            create: jest.fn(),
+            save: jest.fn(),
+            find: jest.fn(),
+            findOne: jest.fn(),
+            delete: jest.fn(),
+          },
+        },
         { provide: getRepositoryToken(User), useValue: { findOne: jest.fn() } },
       ],
     }).compile();

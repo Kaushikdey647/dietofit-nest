@@ -23,7 +23,9 @@ import { HealthzModule } from './healthz/healthz.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
-    MongooseModule.forRoot(mongooseConfig.uri || 'mongodb://localhost:27017/fitdb'),
+    MongooseModule.forRoot(
+      mongooseConfig.uri || 'mongodb://localhost:27017/fitdb',
+    ),
     MetricsModule,
     MealLogModule,
     MealPlanModule,
@@ -47,7 +49,9 @@ export class AppModule implements OnModuleInit {
     }
     // Check MongoDB connection
     try {
-      await mongoose.connect(mongooseConfig.uri || 'mongodb://localhost:27017/fitdb');
+      await mongoose.connect(
+        mongooseConfig.uri || 'mongodb://localhost:27017/fitdb',
+      );
       this.logger.log('MongoDB connection established.');
       await mongoose.disconnect();
     } catch (err) {
@@ -55,4 +59,3 @@ export class AppModule implements OnModuleInit {
     }
   }
 }
-

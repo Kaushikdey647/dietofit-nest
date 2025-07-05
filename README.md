@@ -28,6 +28,7 @@
 ## 🧩 Data Model
 
 ### Entities
+
 - `User`: name, age, gender, height, goal, activityLevel, medicalConditions, roles
 - `Subscription`: planType, status, trialEnd, renewalDate
 - `MetricRecord`: userId, weight, fatMass, lbm, smm, waterPercent, timestamp
@@ -36,6 +37,7 @@
 - `Checklist`: user, waterIntake, exerciseDone, mealFollowed, date
 
 ### Relationships
+
 - Users have many metrics, meal logs, checklists, subscriptions, and meal plans
 - Meal plans and logs are per-user, per-day
 
@@ -43,22 +45,22 @@
 
 ## 🔌 API Endpoints
 
-| Method | Path                        | Description                  |
-|--------|-----------------------------|------------------------------|
-| GET    | `/`                         | Hello World test endpoint    |
-| GET    | `/healthz`                  | Health check (DBs)           |
-| POST   | `/meal-plan/:userId`        | Create meal plan for user    |
-| GET    | `/meal-plan/:userId`        | Get meal plans for user      |
-| DELETE | `/meal-plan/:id`            | Delete meal plan by ID       |
-| POST   | `/meal-log/:userId`         | Create meal log for user     |
-| GET    | `/meal-log/:userId`         | Get meal logs for user       |
-| DELETE | `/meal-log/:id`             | Delete meal log by ID        |
-| POST   | `/metrics`                  | Add metric record            |
-| GET    | `/metrics/:userId`          | Get metrics for user         |
-| POST   | `/subscription/:userId`     | Create subscription for user |
-| GET    | `/subscription/:userId`     | Get subscriptions for user   |
-| DELETE | `/subscription/:id`         | Delete subscription by ID    |
-| GET    | `/api`                      | Swagger API docs             |
+| Method | Path                    | Description                  |
+| ------ | ----------------------- | ---------------------------- |
+| GET    | `/`                     | Hello World test endpoint    |
+| GET    | `/healthz`              | Health check (DBs)           |
+| POST   | `/meal-plan/:userId`    | Create meal plan for user    |
+| GET    | `/meal-plan/:userId`    | Get meal plans for user      |
+| DELETE | `/meal-plan/:id`        | Delete meal plan by ID       |
+| POST   | `/meal-log/:userId`     | Create meal log for user     |
+| GET    | `/meal-log/:userId`     | Get meal logs for user       |
+| DELETE | `/meal-log/:id`         | Delete meal log by ID        |
+| POST   | `/metrics`              | Add metric record            |
+| GET    | `/metrics/:userId`      | Get metrics for user         |
+| POST   | `/subscription/:userId` | Create subscription for user |
+| GET    | `/subscription/:userId` | Get subscriptions for user   |
+| DELETE | `/subscription/:id`     | Delete subscription by ID    |
+| GET    | `/api`                  | Swagger API docs             |
 
 ---
 
