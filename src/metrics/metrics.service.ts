@@ -2,33 +2,18 @@
 import { Injectable } from '@nestjs/common';
 import { MetricsRepository } from '../repositories/metrics.repository';
 import { IMetricRecord } from '../interfaces/metric-record.interface';
+import { MetricRecord } from '../entities/metric-record.entity';
 
 @Injectable()
 export class MetricsService {
   constructor(private readonly metricsRepo: MetricsRepository) {}
 
   async addMetric(
-    userId: number | string,
-    age: number,
-    weight: number,
-    height: number,
+    body: Partial<IMetricRecord & { [key: string]: any }>,
   ): Promise<void> {
-    // Derived metrics
-    const fatMass = weight * 0.2; // Example
-    const lbm = weight - fatMass;
-    const smm = lbm * 0.5;
-    const waterPercent = 60;
-    const record: Partial<IMetricRecord> = {
-      user: userId as any,
-      age,
-      weight,
-      height,
-      fatMass,
-      lbm,
-      smm,
-      waterPercent,
-      timestamp: new Date(),
-    };
+    // Convert DTO/body to a MetricRecord instance for type safety
+    const record = Object.assign(new MetricRecord(), body);
+    MetricRecord.buildAll(record);
     await this.metricsRepo.create(record);
   }
 

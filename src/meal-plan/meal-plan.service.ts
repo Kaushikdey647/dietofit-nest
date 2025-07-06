@@ -24,7 +24,7 @@ export class MealPlanService {
     try {
       const mealPlan = this.mealPlanRepo.create({ ...plan, user });
       return await this.mealPlanRepo.save(mealPlan);
-    } catch (e) {
+    } catch {
       throw new BadRequestException('Failed to create meal plan');
     }
   }
@@ -35,7 +35,7 @@ export class MealPlanService {
         where: { user: { id: userId } },
         order: { startDate: 'DESC' },
       });
-    } catch (e) {
+    } catch {
       throw new BadRequestException('Failed to fetch meal plans');
     }
   }

@@ -20,7 +20,14 @@ export class MealLogController {
     try {
       return await this.mealLogService.create({ ...body, user: userId });
     } catch (e) {
-      throw new HttpException(e.message, e.status || HttpStatus.BAD_REQUEST);
+      if (typeof e === 'object' && e !== null && 'message' in e) {
+        const err = e as { message: string; status?: number };
+        throw new HttpException(
+          err.message,
+          typeof err.status === 'number' ? err.status : HttpStatus.BAD_REQUEST,
+        );
+      }
+      throw new HttpException('Unknown error', HttpStatus.BAD_REQUEST);
     }
   }
 
@@ -29,7 +36,14 @@ export class MealLogController {
     try {
       return await this.mealLogService.findByUser(userId);
     } catch (e) {
-      throw new HttpException(e.message, e.status || HttpStatus.BAD_REQUEST);
+      if (typeof e === 'object' && e !== null && 'message' in e) {
+        const err = e as { message: string; status?: number };
+        throw new HttpException(
+          err.message,
+          typeof err.status === 'number' ? err.status : HttpStatus.BAD_REQUEST,
+        );
+      }
+      throw new HttpException('Unknown error', HttpStatus.BAD_REQUEST);
     }
   }
 
@@ -38,7 +52,14 @@ export class MealLogController {
     try {
       return await this.mealLogService.remove(id);
     } catch (e) {
-      throw new HttpException(e.message, e.status || HttpStatus.BAD_REQUEST);
+      if (typeof e === 'object' && e !== null && 'message' in e) {
+        const err = e as { message: string; status?: number };
+        throw new HttpException(
+          err.message,
+          typeof err.status === 'number' ? err.status : HttpStatus.BAD_REQUEST,
+        );
+      }
+      throw new HttpException('Unknown error', HttpStatus.BAD_REQUEST);
     }
   }
 }

@@ -4,7 +4,7 @@ import { HealthzService } from './healthz.service';
 
 describe('HealthzController', () => {
   let controller: HealthzController;
-  let service: HealthzService;
+  // let service: HealthzService; // Removed unused variable
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -19,7 +19,7 @@ describe('HealthzController', () => {
       ],
     }).compile();
     controller = module.get<HealthzController>(HealthzController);
-    service = module.get<HealthzService>(HealthzService);
+    // service = module.get<HealthzService>(HealthzService); // Removed unused assignment
   });
 
   it('should be defined', () => {

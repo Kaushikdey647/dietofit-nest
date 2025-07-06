@@ -154,3 +154,49 @@ PRs and issues welcome! Please follow the code style and add tests for new featu
 ## 📝 License
 
 MIT
+
+---
+
+## 📏 Flexible Metrics & Derived Calculations
+
+The `MetricRecord` entity and metrics API are designed for maximum flexibility and extensibility:
+
+- **Flexible Input:** The `/metrics` endpoint accepts any combination of observable and derived metric fields in the request body.
+- **Builder Pattern:** All derived/calculated fields (e.g., BMI, bodyFatPercent, waistToHipRatio) are defined via a dependency DAG and mathjs formulas in the entity. No hardcoded logic—just add a formula and dependencies to extend.
+- **Automatic Enrichment:** On every metric record creation, the service uses `MetricRecord.buildAll(record)` to calculate and enrich all possible derived fields, even if not present in the request.
+- **Type-Safe & Robust:** The builder is fully type-safe, cycle-safe, and production-ready. All dynamic property access is checked, and extensibility is as simple as adding a new formula.
+- **Multi-DB Save:** Enriched records are saved to both MongoDB and Postgres, with all calculated fields included.
+
+### Example: Adding a New Derived Metric
+
+To add a new derived metric (e.g., `fatFreeMassIndex`):
+
+1. Add a public field to `MetricRecord` with a `@Column` decorator.
+2. Add its dependencies and formula:
+   ```ts
+   static fieldDependencies = {
+     ...existing code...
+     fatFreeMassIndex: ['lbm', 'height'],
+   };
+   static formulas = {
+     ...existing code...
+     fatFreeMassIndex: 'lbm / (height * height)',
+   };
+   ```
+3. That's it! The API will now accept, calculate, and persist this field automatically.
+
+### Example Request
+
+```json
+POST /metrics
+{
+  "userId": 1,
+  "weight": 80,
+  "height": 1.8,
+  "fatMass": 16
+}
+```
+
+The response and stored record will include all derived fields (e.g., `bmi`, `bodyFatPercent`) calculated from the provided data.
+
+---

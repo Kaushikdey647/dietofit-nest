@@ -24,7 +24,7 @@ export class MealLogService {
     try {
       const mealLog = this.mealLogRepo.create({ ...log, user });
       return await this.mealLogRepo.save(mealLog);
-    } catch (e) {
+    } catch {
       throw new BadRequestException('Failed to create meal log');
     }
   }
@@ -35,7 +35,7 @@ export class MealLogService {
         where: { user: { id: userId } },
         order: { timestamp: 'DESC' },
       });
-    } catch (e) {
+    } catch {
       throw new BadRequestException('Failed to fetch meal logs');
     }
   }

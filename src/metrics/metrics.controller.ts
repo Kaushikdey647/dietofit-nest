@@ -1,26 +1,14 @@
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { MetricsService } from './metrics.service';
+import { CreateMetricRecordDto } from '../dtos/create-metric-record.dto';
 
 @Controller('metrics')
 export class MetricsController {
   constructor(private readonly metricsService: MetricsService) {}
 
   @Post()
-  async addMetric(
-    @Body()
-    body: {
-      userId: number | string;
-      age: number;
-      weight: number;
-      height: number;
-    },
-  ) {
-    await this.metricsService.addMetric(
-      body.userId,
-      body.age,
-      body.weight,
-      body.height,
-    );
+  async addMetric(@Body() body: CreateMetricRecordDto) {
+    await this.metricsService.addMetric(body);
     return { success: true };
   }
 
