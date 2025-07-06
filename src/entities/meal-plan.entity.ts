@@ -1,6 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  ManyToMany,
+  OneToMany,
+} from 'typeorm';
 import { MealPlanTable } from './meal-plan-table.entity';
 import { User } from './user.entity';
+import { FoodItem } from './food-item.entity';
 
 export enum MealType {
   BREAKFAST = 'breakfast',
@@ -8,19 +16,22 @@ export enum MealType {
   DINNER = 'dinner',
 }
 
+//TODO: Put away weekday and time of meal so that we dont have querying issues
+//TODO: HOW WILL YOU QUERY FOR MEALS EACH DAY?
+//TODO: We make a food entity(pandit)
 @Entity()
 export class MealPlan {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => MealPlanTable, (table) => table.mealPlans)
+  @ManyToMany(() => MealPlanTable, (table) => table.mealPlans)
   mealPlanTable: MealPlanTable;
 
   @ManyToOne(() => User)
   user: User;
 
   @Column({ type: 'enum', enum: MealType })
-  meal: MealType;
+  mealType: MealType;
 
   @Column({
     type: 'enum',
@@ -36,26 +47,11 @@ export class MealPlan {
   })
   weekday: string;
 
+  @ManyToMany(() => FoodItem, { cascade: true })
+  foodItems: FoodItem[];
+
   @Column('float')
   calories: number;
-
-  @Column('float')
-  fats: number;
-
-  @Column('float')
-  carbs: number;
-
-  @Column('float')
-  fibers: number;
-
-  @Column('float')
-  vitamins: number;
-
-  @Column('float')
-  protein: number;
-
-  @Column('simple-json')
-  items: string[];
 
   @Column({ type: 'timestamp', nullable: true })
   startDate: Date;

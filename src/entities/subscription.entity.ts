@@ -15,10 +15,17 @@ export class Subscription {
   @ManyToOne(() => User, (user) => user.id)
   user: User;
 
-  @Column()
+  @Column({
+    type: 'enum',
+    enum: ['free', 'basic', 'premium', 'enterprise'],
+  })
   planType: string;
 
-  @Column()
+  @Column({
+    type: 'enum',
+    enum: ['active', 'inactive', 'cancelled', 'expired', 'trialing'],
+    default: 'active',
+  })
   status: string;
 
   @Column({ type: 'date', nullable: true })
